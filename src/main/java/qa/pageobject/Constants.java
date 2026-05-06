@@ -1,4 +1,4 @@
-package ru.services.education.scooter.qa;
+package qa.pageobject;
 
 import java.time.Duration;
 

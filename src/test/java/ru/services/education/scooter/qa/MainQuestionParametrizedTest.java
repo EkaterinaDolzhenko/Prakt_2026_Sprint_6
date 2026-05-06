@@ -5,14 +5,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import qa.pageobject.MainPageScooter;
 
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainQuestionParametrizedTest {
 
     @RegisterExtension
-    private final DriverExtension extension = new DriverExtension();
+    public final DriverExtension extension = new DriverExtension();
 
     // Метод-источник данных
     public static Stream<Object[]> getQuestionData() {
@@ -32,6 +35,8 @@ public class MainQuestionParametrizedTest {
         mainPageScooter.open();
         mainPageScooter.clickAcceptCookie();
         mainPageScooter.clickQuestion(question);
-        mainPageScooter.checkAnswerText(answer, expected);
+
+        String actualText = mainPageScooter.getAnswerText(answer);
+        assertEquals(expected, actualText, "Текст ответа не совпадает");
     }
 }
