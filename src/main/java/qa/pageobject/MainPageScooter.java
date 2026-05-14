@@ -1,12 +1,9 @@
-package ru.services.education.scooter.qa;
+package qa.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class MainPageScooter {
     //Кнопка "да все привыкли"
@@ -96,11 +93,10 @@ public class MainPageScooter {
         wait.until(ExpectedConditions.elementToBeClickable(question));
         driver.findElement(question).click();
     }
-    // Метод для проверки ответа с параметром
-    public void checkAnswerText(By answer, String expectedText) {
+    //Метод для получения текста ответа
+    public String getAnswerText(By answer) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(answer));
-        String actualText = driver.findElement(answer).getText();
-        assertEquals(expectedText, actualText);
+        return driver.findElement(answer).getText();
     }
     //Метод для клика по кнопке заказать в шапке
     public void clickCreateOrderHeader() {

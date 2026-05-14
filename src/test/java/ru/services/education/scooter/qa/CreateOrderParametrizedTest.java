@@ -5,14 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
+import qa.pageobject.Constants;
+import qa.pageobject.MainPageScooter;
+import qa.pageobject.OrderPageScooter;
 
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class CreateOrderParametrizedTest {
 
     @RegisterExtension
-    private final DriverExtension extension = new DriverExtension();
+    public final DriverExtension extension = new DriverExtension();
 
     // Метод-источник данных
     public static Stream<Object[]> getFormData() {
@@ -44,7 +49,9 @@ public class CreateOrderParametrizedTest {
         orderPageScooter.inputRentInformation(date,comment,period,checkBox);
         orderPageScooter.clickCreateOrderButton();
         orderPageScooter.clickConfirmOrderButton();
-        orderPageScooter.verifyOrderSuccess();
+
+        assertTrue(orderPageScooter.isOrderSuccessDisplayed(),
+                "Сообщение об успехе не отображается после создания заказа");
     }
 
     @ParameterizedTest
@@ -61,6 +68,8 @@ public class CreateOrderParametrizedTest {
         orderPageScooter.inputRentInformation(date,comment,period,checkBox);
         orderPageScooter.clickCreateOrderButton();
         orderPageScooter.clickConfirmOrderButton();
-        orderPageScooter.verifyOrderSuccess();
+
+        assertTrue(orderPageScooter.isOrderSuccessDisplayed(),
+                "Сообщение об успехе не отображается после создания заказа");
     }
 }

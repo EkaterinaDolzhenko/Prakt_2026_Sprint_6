@@ -1,12 +1,10 @@
-package ru.services.education.scooter.qa;
+package qa.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderPageScooter {
     //Поле с именем
@@ -137,10 +135,10 @@ public class OrderPageScooter {
         wait.until(ExpectedConditions.elementToBeClickable(confirmOrderButton));
         driver.findElement(confirmOrderButton).click();
     }
-    // Метод для проверки успешного сообщения
-    public void verifyOrderSuccess() {
-        assertTrue(driver.findElement(successfulMessage).isDisplayed(),
-                "Сообщение об успехе не отображается");
+    //Метод для проверки видимости сообщения
+    public boolean isOrderSuccessDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successfulMessage));
+        return driver.findElement(successfulMessage).isDisplayed();
     }
 
     //Метод для заполнения персональной информации
